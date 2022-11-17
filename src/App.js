@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [auth, setAuth] = useState(false || window.localStorage.getItem("auth"==='true'));
+  const [loading, setLoading] = useState(true);
   const [token, setToken] =useState('')
   const [email, setEmail] =useState('')
 
@@ -22,6 +23,7 @@ function App() {
           setEmail(token.claims.email)
         })
       }
+      setLoading(false)
     });
   }, []);
 
@@ -40,9 +42,9 @@ function App() {
     <div className="App">
       {auth ? (
         <Home token={token} email={email}></Home>
-      ) : (
-        <button onClick={loginwithGoogle}> Login with Google</button>
-      )}
+      ) : loading ? (
+        <div style={{height:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}>Please wait....</div>
+      ):  <button onClick={loginwithGoogle}> Login with Google</button>}
     </div>
   );
 }
