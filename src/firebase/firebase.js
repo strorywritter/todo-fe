@@ -17,6 +17,7 @@ const db = app.firestore();
 
 const logout = () => {
   auth.signOut();
+  window.location.reload()
 };
 
 export {

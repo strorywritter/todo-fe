@@ -10,15 +10,15 @@ function ToDoList({ tasks, onChange }) {
 
 
   return (
-    <Box sx={{ flexGrow: 1, margin:'20px' }}>
-    <Grid container spacing={2}>
-    {tasks.map((task) => (
-      <Grid item xs={3} key={task.id} >
+    <>
+ 
+    {tasks.map((task,i) => (
+      <div key={i} style={{padding:'10px', justifyContent:'center', display:'flex'}}>
         <TodoCard task={task} onChange={onChange}/>
-      </Grid>
+      </div>
       ))}
-    </Grid>
-  </Box>
+ 
+  </>
   )
 }
 
