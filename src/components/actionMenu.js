@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { ChangeCircle } from '@mui/icons-material';
 
 const options = [
   'Todo',
@@ -12,14 +13,15 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-export default function ActionMenu({ task, onChange }) {
+export default function ActionMenu({ task, onChange,id }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (option,_id) => {
     setAnchorEl(null);
+    onChange(option,_id)
   };
 
   return (
@@ -50,7 +52,7 @@ export default function ActionMenu({ task, onChange }) {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e) => {handleClose(e); onChange(e.target.value,task._id);}}>
+          <MenuItem key={option} selected={option === 'Pyxis'} onClick={(e) => {handleClose(option,id)}}>
             {option}
           </MenuItem>
         ))}
