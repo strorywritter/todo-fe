@@ -34,7 +34,6 @@ export default function TodoCard({ task, onChange }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-console.log('================================',task)
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
