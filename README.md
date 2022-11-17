@@ -11,6 +11,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `docker-compose up -d --build`
 
-**Note: this is for up the docker container!**
+**Note: this is for up the docker container. Before this step you must locally install docker desktop on your local machine**
 
 You can up the server with docker and run the application
