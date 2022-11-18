@@ -12,6 +12,7 @@ import ToDoList from "../components/toDoList";
 function Home({ token, email }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const [taskName, setTaskName] = useState();
   const [description, setDescription] = useState();
   const [triggerFetch,settriggerFetch] = useState(false)
@@ -103,6 +104,7 @@ function Home({ token, email }) {
   }, [token,triggerFetch]);
 
   const taskSubmit = async (e) => {
+    setUploading(true)
     e.preventDefault();
     setLoading(true);
     const formdata = new FormData();
@@ -120,10 +122,12 @@ function Home({ token, email }) {
         console.log("todo added");
         setLoading(false);
         settriggerFetch(!triggerFetch)
+        setTriggerCloseDialog(!triggerCloseDialog)
       });
-      setTriggerCloseDialog(!triggerCloseDialog)
+      setUploading(false)
       setTaskName('')
       setDescription('')
+
   };
 
   const taskUpdate = async (status, id) => {
@@ -142,14 +146,14 @@ function Home({ token, email }) {
         console.log("todo updated");
         setLoading(false);
         settriggerFetch(!triggerFetch)
-        // window.location.reload()
       });
   };
 
   return (
     <div>
-      <CustomAppBar triggerCloseDialog={triggerCloseDialog} addTodo={<div  styles={{margin:'15px'}}>
-        <form styles={{padding:'5px'}} onSubmit={taskSubmit}>
+      <CustomAppBar triggerCloseDialog={triggerCloseDialog} addTodo={
+      uploading ? <div>Please wait</div> : <div  styles={{margin:'15px'}}>
+        <form styles={{padding:'5px'}} onSubmit={(e)=>{taskSubmit(e)}}>
           <TextField id="standard-basic" label="Task Name" variant="standard" margin="normal" fullWidth value={taskName} onChange={(e)=>setTaskName(e.target.value)}/>
           <TextField id="standard-basic" label="Description" variant="standard" margin="normal" fullWidth value={description} onChange={(e)=>setDescription(e.target.value)}/>
             <input type="file" onChange={(e)=>setFile(e.target.files[0])}/>
