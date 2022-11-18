@@ -28,7 +28,7 @@ export default function TodoCard({ task, onChange }) {
     setExpanded(!expanded);
   };
   return (
-    <Card sx={{ maxWidth: 345, height: 400,display:'flex',alignItems:'space-between',flexDirection:'column',justifyContent:'space-between' }}>
+    <Card sx={{ maxWidth: 345, height: 550,display:'flex',alignItems:'space-between',flexDirection:'column',justifyContent:'space-between' }}>
       <CardHeader
         action={
           <ActionMenu task={task} onChange={onChange} id={task._id}/>
