@@ -1,9 +1,7 @@
-import React from 'react'
-import TodoCard from './todoCard'
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import React from 'react';
+import TodoCard from './todoCard';
 
 function ToDoList({ tasks, onChange }) {
 

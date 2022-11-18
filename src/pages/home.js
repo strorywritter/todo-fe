@@ -1,16 +1,13 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import CustomAppBar from "../components/appBar";
-import ToDoList from "../components/toDoList";
-import axios from "axios";
-import Grid from "@mui/material/Grid";
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import BasicDateRangePicker from "../components/dateRangePicker";
 import { Button } from "@mui/material";
-import { Diversity1 } from "@mui/icons-material";
+import Grid from "@mui/material/Grid";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import CustomAppBar from "../components/appBar";
+import BasicDateRangePicker from "../components/dateRangePicker";
+import ToDoList from "../components/toDoList";
 
 function Home({ token, email }) {
   const [tasks, setTasks] = useState([]);
@@ -18,7 +15,6 @@ function Home({ token, email }) {
   const [taskName, setTaskName] = useState();
   const [description, setDescription] = useState();
   const [triggerFetch,settriggerFetch] = useState(false)
-  // const [email, setEmail] = useState("");
   const [file, setFile] = useState();
   const [filterOption, setFilterOption] = React.useState('all');
   const [value, setValue] = React.useState([null, null])
@@ -62,8 +58,7 @@ function Home({ token, email }) {
       startDate: value[0].$d.toISOString(),
       endDate: value[1].$d.toISOString()
     }
-    // bodyData.append("startDate", value[0].$d.toISOString().split('Z')[0]);
-    // bodyData.append("endDate", value[1].$d.toISOString().split('Z')[0]);
+ 
     await axios
       .post(`http://localhost:4000/user/getTodoByDate`,bodyData, {
         headers: {
@@ -76,8 +71,6 @@ function Home({ token, email }) {
         setLoading(false);
       });
   };
-
-
 
   const updateTaskList = (token) => {
     switch (filterOption){
@@ -159,7 +152,6 @@ function Home({ token, email }) {
         <form styles={{padding:'5px'}} onSubmit={taskSubmit}>
           <TextField id="standard-basic" label="Task Name" variant="standard" margin="normal" fullWidth value={taskName} onChange={(e)=>setTaskName(e.target.value)}/>
           <TextField id="standard-basic" label="Description" variant="standard" margin="normal" fullWidth value={description} onChange={(e)=>setDescription(e.target.value)}/>
-          {/* <TextField id="standard-basic" label="Email" variant="standard" margin="normal" fullWidth value={email} onChange={(e)=>setEmail(e.target.value)}/> */}
             <input type="file" onChange={(e)=>setFile(e.target.files[0])}/>
 
             <button type="submit" style={{backgroundColor:'blue',color:'white',padding:'10px', borderRadius:'5px'}}>Submit</button>
@@ -179,7 +171,6 @@ function Home({ token, email }) {
           <MenuItem value={'inProgress'}>In progress</MenuItem>
           <MenuItem value={'done'}>Done</MenuItem>
         </Select>
-
         </Grid>
         <div style={{display:'flex',flexDirection:'row'}}>
         <BasicDateRangePicker value={value} setValue={setValue}/>
