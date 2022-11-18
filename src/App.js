@@ -6,6 +6,8 @@ import PageRoutes from "./Routes/Routes";
 import firebase from "firebase/compat/app";
 import "firebase/auth";
 import { useState, useEffect } from "react";
+import Button from '@mui/material/Button';
+import GoogleIcon from '@mui/icons-material/Google';
 
 function App() {
   const [auth, setAuth] = useState(false || window.localStorage.getItem("auth"==='true'));
@@ -44,7 +46,9 @@ function App() {
         <Home token={token} email={email}></Home>
       ) : loading ? (
         <div style={{height:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}>Please wait....</div>
-      ):  <button onClick={loginwithGoogle}> Login with Google</button>}
+      ):      <div style={{height:'100vh',display:'flex',alignItems:'center',justifyContent:'center'}}><Button variant="outlined" onClick={loginwithGoogle} startIcon={<GoogleIcon />}>
+      Login with Google
+    </Button></div>}
     </div>
   );
 }

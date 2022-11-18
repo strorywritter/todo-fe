@@ -11,13 +11,15 @@ function ToDoList({ tasks, onChange }) {
 
   return (
     <>
- 
-    {tasks.map((task,i) => (
-      <div key={i} style={{padding:'10px', justifyContent:'center', display:'flex'}}>
+    <Box sx={{ flexGrow: 1, margin:'20px' }}>
+    <Grid container spacing={2}>
+    {tasks.map((task) => (
+      <Grid item xs={3} key={task.id} >
         <TodoCard task={task} onChange={onChange}/>
-      </div>
+      </Grid>
       ))}
- 
+    </Grid>
+  </Box>
   </>
   )
 }

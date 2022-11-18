@@ -14,7 +14,7 @@ export default function BasicDateRangePicker({value,setValue}) {
     <div style={{ padding:'20px'}}>
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
-      localeText={{ start: 'Check-in', end: 'Check-out' }}
+      localeText={{ start: 'Start Date', end: 'End Date' }}
     >
       <DateRangePicker
         value={value}

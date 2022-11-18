@@ -35,7 +35,7 @@ export default function TodoCard({ task, onChange }) {
     setExpanded(!expanded);
   };
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, height: 400,display:'flex',alignItems:'space-between',flexDirection:'column',justifyContent:'space-between' }}>
       <CardHeader
         action={
           <ActionMenu task={task} onChange={onChange} id={task._id}/>
@@ -47,7 +47,8 @@ export default function TodoCard({ task, onChange }) {
       />
       <CardMedia
         component="img"
-        height="194"
+        width="200"
+        height="200"
         src={task.file}
         alt="todo"
       />

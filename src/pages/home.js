@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import BasicDateRangePicker from "../components/dateRangePicker";
 import { Button } from "@mui/material";
+import { Diversity1 } from "@mui/icons-material";
 
 function Home({ token, email }) {
   const [tasks, setTasks] = useState([]);
@@ -20,7 +21,8 @@ function Home({ token, email }) {
   // const [email, setEmail] = useState("");
   const [file, setFile] = useState();
   const [filterOption, setFilterOption] = React.useState('all');
-  const [value, setValue] = React.useState([null, null]);
+  const [value, setValue] = React.useState([null, null])
+  const [triggerCloseDialog,setTriggerCloseDialog] = useState(false)
 
   const handleChange = (event) => {
     setFilterOption(event.target.value);
@@ -126,6 +128,9 @@ function Home({ token, email }) {
         setLoading(false);
         settriggerFetch(!triggerFetch)
       });
+      setTriggerCloseDialog(!triggerCloseDialog)
+      setTaskName('')
+      setDescription('')
   };
 
   const taskUpdate = async (status, id) => {
@@ -150,7 +155,16 @@ function Home({ token, email }) {
 
   return (
     <div>
-      <CustomAppBar />
+      <CustomAppBar triggerCloseDialog={triggerCloseDialog} addTodo={<div  styles={{margin:'15px'}}>
+        <form styles={{padding:'5px'}} onSubmit={taskSubmit}>
+          <TextField id="standard-basic" label="Task Name" variant="standard" margin="normal" fullWidth value={taskName} onChange={(e)=>setTaskName(e.target.value)}/>
+          <TextField id="standard-basic" label="Description" variant="standard" margin="normal" fullWidth value={description} onChange={(e)=>setDescription(e.target.value)}/>
+          {/* <TextField id="standard-basic" label="Email" variant="standard" margin="normal" fullWidth value={email} onChange={(e)=>setEmail(e.target.value)}/> */}
+            <input type="file" onChange={(e)=>setFile(e.target.files[0])}/>
+
+            <button type="submit" style={{backgroundColor:'blue',color:'white',padding:'10px', borderRadius:'5px'}}>Submit</button>
+          </form>
+      </div>}/>
       <Grid container spacing={2} style={{margin:'10px'}}>
         <Grid item xs={6}>
         <Select
@@ -167,22 +181,14 @@ function Home({ token, email }) {
         </Select>
 
         </Grid>
-        <Grid>
+        <div style={{display:'flex',flexDirection:'row'}}>
         <BasicDateRangePicker value={value} setValue={setValue}/>
         <Button onClick={()=>getTodoByDate(token)}>Filter</Button>
-        </Grid>
-        <Grid item xs={6} >
+        </div>
+      </Grid>
+      <Grid>
+      <Grid item xs={6} >
           <ToDoList tasks={tasks} onChange={taskUpdate} />
-        </Grid>
-        <Grid item xs={6}>
-          <form styles={{padding:'5px'}} onSubmit={taskSubmit}>
-          <TextField id="standard-basic" label="Task Name" variant="standard" margin="normal" fullWidth value={taskName} onChange={(e)=>setTaskName(e.target.value)}/>
-          <TextField id="standard-basic" label="Description" variant="standard" margin="normal" fullWidth value={description} onChange={(e)=>setDescription(e.target.value)}/>
-          {/* <TextField id="standard-basic" label="Email" variant="standard" margin="normal" fullWidth value={email} onChange={(e)=>setEmail(e.target.value)}/> */}
-            <input type="file" onChange={(e)=>setFile(e.target.files[0])}/>
-
-            <button type="submit" style={{backgroundColor:'blue',color:'white',padding:'10px', borderRadius:'5px'}}>Submit</button>
-          </form>
         </Grid>
       </Grid>
     </div>
